@@ -149,8 +149,8 @@ size_t SerialPolicyUnix::rx(uint8_t* data, const size_t max_data_sz) {
         for (size_t i = 0; i < toread; i++)
             printf("%02X", data[i]);
         printf("\n");
-        // }
-#endif
-
-        return numBytesRead >= 0 ? numBytesRead : 0;
     }
+    // #endif
+
+    return numBytesRead >= 0 ? numBytesRead : 0;
+}
