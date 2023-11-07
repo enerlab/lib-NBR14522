@@ -57,27 +57,25 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
             break;
         case Dessincronizado:
             _porta->rx(&byte, 1);
-            // printf("rx: %02X\n", byte);
-            // if (byte == NBR14522::ENQ) {
-            _estado = Sincronizado;
-            _timer.setTimeout(NBR14522::TMAXENQ_MSEC);
-            // }
+            if (byte == NBR14522::ENQ) {
+                _estado = Sincronizado;
+                _timer.setTimeout(NBR14522::TMAXENQ_MSEC);
+            }
             break;
         case Sincronizado:
             if (_timer.timedOut()) {
                 _estado = Dessincronizado;
                 _esvaziaPortaSerial();
+            } else if (_porta->rx(&byte, 1) && byte == NBR14522::ENQ) {
+                _transmiteComando();
+                _counterNakRecebido = 0;
+                _counterNakTransmitido = 0;
+                _counterSemResposta = 0;
+                _counterWaitRecebido = 0;
+                _isRespostaComposta = false;
+                _timer.setTimeout(NBR14522::TMAXRSP_MSEC);
+                _estado = ComandoTransmitido;
             }
-            // else if (_porta->rx(&byte, 1) && byte == NBR14522::ENQ) {
-            _transmiteComando();
-            _counterNakRecebido = 0;
-            _counterNakTransmitido = 0;
-            _counterSemResposta = 0;
-            _counterWaitRecebido = 0;
-            _isRespostaComposta = false;
-            _timer.setTimeout(NBR14522::TMAXRSP_MSEC);
-            _estado = ComandoTransmitido;
-            // }
             break;
         case ComandoTransmitido:
             if (_timer.timedOut()) {
