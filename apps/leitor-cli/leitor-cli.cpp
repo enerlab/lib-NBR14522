@@ -56,6 +56,7 @@ std::vector<byte_t> get_hex_bytes(const std::string& hexbytes) {
 }
 
 int main(int argc, char* argv[]) {
+    printf("Enerlab: NBR\n\n");
     if (argc < 3) {
         printf("Número de argumentos inválido.\n\n");
         print_usage();
