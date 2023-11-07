@@ -294,6 +294,7 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
 
     void _transmiteComando() {
         // printf("tx: %02X\n", _comando.data());
+        int i;
         for (i = 0; i < _comando.size(); i++) {
             if (i > 0)
                 printf(":");
