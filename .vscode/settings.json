@@ -6,6 +6,7 @@
 		"string": "cpp",
 		"vector": "cpp",
 		"functional": "cpp",
-		"cstddef": "cpp"
+		"cstddef": "cpp",
+		"__config": "cpp"
 	}
 }

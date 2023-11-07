@@ -293,7 +293,8 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
     }
 
     void _transmiteComando() {
-        printf("tx: %02X\n", _comando.data());
+        // printf("tx: %02X\n", _comando.data());
+        printf("tx: %d", _comando.size());
 
         // nao incluir os dois ultimos bytes de CRC no calculo do CRC
         NBR14522::setCRC(_comando, CRC16(_comando.data(), _comando.size() - 2));
