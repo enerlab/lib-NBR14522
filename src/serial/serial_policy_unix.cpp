@@ -133,7 +133,6 @@ size_t SerialPolicyUnix::tx(const uint8_t* data, const size_t data_sz) {
 }
 
 size_t SerialPolicyUnix::rx(uint8_t* data, const size_t max_data_sz) {
-    printf("<-- ");
     int toread = 0;
     ioctl(_fd, FIONREAD, &toread);
     if (toread <= 0)
@@ -146,7 +145,7 @@ size_t SerialPolicyUnix::rx(uint8_t* data, const size_t max_data_sz) {
 
     // #ifdef PRINT_BYTES
     if (numBytesRead >= 0) {
-
+        printf("<-- ");
         for (size_t i = 0; i < toread; i++)
             printf("%02X", data[i]);
         printf("\n");
