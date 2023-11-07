@@ -36,6 +36,8 @@ class Leitor {
         while (true) {
             typename FSM::estado_t estado = _leitor.processaEstado();
 
+            LogPolicy::log("Estado: %s\n", _estado2string(estado));
+
             switch (estado) {
             case FSM::estado_t::AguardaNovoComando:
                 switch (_leitor.status()) {

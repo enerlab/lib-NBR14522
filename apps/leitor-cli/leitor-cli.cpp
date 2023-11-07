@@ -1,16 +1,16 @@
 // this is a command-line application for reading NBR14522 compatible meter.
 // Read usage below.
 
-#include <vector>
 #include <NBR14522.h>
 #include <functional>
 #include <leitor.h>
 #include <serial/serial_policy_generic_os.h>
 #include <timer/timer_policy_generic_os.h>
+#include <vector>
 
 using namespace NBR14522;
 
-#define TIMEOUT_SEM_RESPOSTA_MS 5000
+#define TIMEOUT_SEM_RESPOSTA_MS 10000
 
 template <typename T, size_t N>
 void print_arr_hex(const std::array<T, N>& arr) {
