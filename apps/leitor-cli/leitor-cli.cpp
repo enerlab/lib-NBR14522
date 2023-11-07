@@ -11,7 +11,6 @@
 using namespace NBR14522;
 
 #define TIMEOUT_SEM_RESPOSTA_MS 10000
-#define PRINT_BYTES 1
 
 template <typename T, size_t N>
 void print_arr_hex(const std::array<T, N>& arr) {

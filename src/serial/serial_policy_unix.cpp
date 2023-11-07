@@ -120,12 +120,12 @@ void SerialPolicyUnix::closeSerial() {
 SerialPolicyUnix::~SerialPolicyUnix() { closeSerial(); }
 
 size_t SerialPolicyUnix::tx(const uint8_t* data, const size_t data_sz) {
-#ifdef PRINT_BYTES
+    // #ifdef PRINT_BYTES
     printf("--> ");
     for (size_t i = 0; i < data_sz; i++)
         printf("%02X", data[i]);
     printf("\n");
-#endif
+    // #endif
     ssize_t numBytesWritten = write(_fd, data, data_sz);
 
     return numBytesWritten >= 0 ? numBytesWritten : 0;
@@ -142,14 +142,14 @@ size_t SerialPolicyUnix::rx(uint8_t* data, const size_t max_data_sz) {
 
     ssize_t numBytesRead = read(_fd, data, toread);
 
-#ifdef PRINT_BYTES
+    // #ifdef PRINT_BYTES
     if (numBytesRead >= 0) {
         printf("<-- ");
         for (size_t i = 0; i < toread; i++)
             printf("%02X", data[i]);
         printf("\n");
-    }
+        // }
 #endif
 
-    return numBytesRead >= 0 ? numBytesRead : 0;
-}
+        return numBytesRead >= 0 ? numBytesRead : 0;
+    }
