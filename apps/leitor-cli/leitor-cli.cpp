@@ -11,6 +11,7 @@
 using namespace NBR14522;
 
 #define TIMEOUT_SEM_RESPOSTA_MS 10000
+#define PRINT_BYTES 1
 
 template <typename T, size_t N>
 void print_arr_hex(const std::array<T, N>& arr) {
@@ -66,8 +67,9 @@ int main(int argc, char* argv[]) {
     std::shared_ptr<SerialPolicyGenericOS> porta =
         std::make_shared<SerialPolicyGenericOS>();
 
-    if (!porta->openSerial(argv[1], BAUDRATE_2400, DATABITS_8, PARITY_NONE,
-                           STOPBITS_1)) {
+    // if (!porta->openSerial(argv[1], BAUDRATE_2400, DATABITS_8, PARITY_NONE,
+    //                        STOPBITS_1)) {
+    if (!porta->openSerial(argv[1])) {
         printf("Não foi possível abrir a porta serial\n\n");
         return EXIT_FAILURE;
     }
