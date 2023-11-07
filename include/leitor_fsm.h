@@ -55,7 +55,9 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
             // setComando()
             break;
         case Dessincronizado:
-            if (_porta->rx(&byte, 1) && byte == NBR14522::ENQ) {
+            _porta->rx(&byte, 1);
+            printf("rx: %02X\n", byte);
+            if (byte == NBR14522::ENQ) {
                 _estado = Sincronizado;
                 _timer.setTimeout(NBR14522::TMAXENQ_MSEC);
             }
@@ -290,6 +292,8 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
     }
 
     void _transmiteComando() {
+        printf("tx: %02X\n", _comando.data());
+
         // nao incluir os dois ultimos bytes de CRC no calculo do CRC
         NBR14522::setCRC(_comando, CRC16(_comando.data(), _comando.size() - 2));
         _porta->tx(_comando.data(), _comando.size());
