@@ -57,7 +57,7 @@ template <class TimerPolicy, class SerialPolicy> class LeitorFSM {
             break;
         case Dessincronizado:
             _porta->rx(&byte, 1);
-            // printf("rx: %02X\n", byte);
+            printf("rx: %02X\n", byte);
             if (byte == NBR14522::ENQ) {
                 _estado = Sincronizado;
                 _timer.setTimeout(NBR14522::TMAXENQ_MSEC);
